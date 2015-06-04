@@ -426,11 +426,11 @@ module Kitchen
 
       def create_ec2_json(state)
         if windows_os?
-          s = 'mkdir \etc\chef\ohai\hints; echo "" > \etc\chef\ohai\hints\ec2.json'
+          cmd = "mkdir c:\\chef\\ohai\\hints; echo $null >> c:\\chef\\ohai\\hints\\ec2.json"
         else
-          s = "sudo mkdir -p /etc/chef/ohai/hints;sudo touch /etc/chef/ohai/hints/ec2.json"
+          cmd = "sudo mkdir -p /etc/chef/ohai/hints;sudo touch /etc/chef/ohai/hints/ec2.json"
         end
-        instance.transport.connection(state).execute(s)
+        instance.transport.connection(state).execute(cmd)
       end
 
       def default_windows_user_data
