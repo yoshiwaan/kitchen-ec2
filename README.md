@@ -21,8 +21,13 @@ Please read the [Driver usage][driver_usage] page for more details.
 ## Default Configuration
 
 This driver can determine AMI and username login for a select number of
-platforms in each region. Currently, the following platform names are
-supported:
+platforms in each region.
+
+For Windows instances the generated Administrator password is fetched
+automatically from Amazon EC2 with the same private key as we use for
+SSH logins to Linux.
+
+Currently, the following platform names are supported:
 
 ```ruby
 ---
@@ -45,15 +50,18 @@ platforms:
   - name: ubuntu-10.04
     driver:
       image_id: ami-1ab3ce73
+    transport:
       username: ubuntu
   - name: ubuntu-12.04
     driver:
       image_id: ami-2f115c46
+    transport:
       username: ubuntu
   # ...
   - name: centos-6.4
     driver:
       image_id: ami-bf5021d6
+    transport:
       username: root
   # ...
 ```
@@ -387,11 +395,13 @@ platforms:
   - name: ubuntu-12.04
     driver:
       image_id: ami-fd20ad94
-      username: ubuntu
   - name: centos-6.3
     driver:
       image_id: ami-ef5ff086
+    transport:
       username: ec2-user
+  - name: windows-2012r2
+  - name: windows-2008r2
 
 suites:
 # ...
